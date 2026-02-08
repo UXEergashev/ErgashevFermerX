@@ -56,7 +56,6 @@ export const translations = {
             finance: 'Moliya',
             warehouse: 'Ombor',
             analytics: 'Tahlil',
-            weather: 'Ob-havo',
             reports: 'Hisobotlar'
         },
 
@@ -93,9 +92,7 @@ export const translations = {
             warehouseItems: 'Ombor mahsulotlari',
             totalExpenses: 'Umumiy xarajatlar',
             totalIncome: 'Umumiy daromad',
-            balance: 'Balans',
-            weatherInfo: 'Ob-havo ma\'lumoti',
-            weatherHint: 'Batafsil ob-havo ma\'lumotini "Ob-havo" bo\'limida ko\'ring'
+            balance: 'Balans'
         },
 
         // Crops
@@ -207,21 +204,7 @@ export const translations = {
             }
         },
 
-        // Weather
-        weather: {
-            title: 'Ob-havo ma\'lumoti',
-            currentWeather: 'Hozirgi ob-havo',
-            forecast: 'Prognoz',
-            temperature: 'Harorat',
-            humidity: 'Namlik',
-            wind: 'Shamol',
-            pressure: 'Bosim',
-            city: 'Shahar',
-            searchCity: 'Shahar qidirish',
-            today: 'Bugun',
-            tomorrow: 'Ertaga',
-            weekly: 'Haftalik'
-        },
+
 
         // Analytics
         analytics: {
@@ -343,7 +326,6 @@ export const translations = {
             finance: 'Финансы',
             warehouse: 'Склад',
             analytics: 'Аналитика',
-            weather: 'Погода',
             reports: 'Отчёты'
         },
 
@@ -380,9 +362,7 @@ export const translations = {
             warehouseItems: 'Товары на складе',
             totalExpenses: 'Общие расходы',
             totalIncome: 'Общий доход',
-            balance: 'Баланс',
-            weatherInfo: 'Информация о погоде',
-            weatherHint: 'Подробную информацию о погоде смотрите в разделе "Погода"'
+            balance: 'Баланс'
         },
 
         // Crops
@@ -494,21 +474,7 @@ export const translations = {
             }
         },
 
-        // Weather
-        weather: {
-            title: 'Информация о погоде',
-            currentWeather: 'Текущая погода',
-            forecast: 'Прогноз',
-            temperature: 'Температура',
-            humidity: 'Влажность',
-            wind: 'Ветер',
-            pressure: 'Давление',
-            city: 'Город',
-            searchCity: 'Поиск города',
-            today: 'Сегодня',
-            tomorrow: 'Завтра',
-            weekly: 'На неделю'
-        },
+
 
         // Analytics
         analytics: {
@@ -628,7 +594,6 @@ export const translations = {
             finance: 'Finance',
             warehouse: 'Warehouse',
             analytics: 'Analytics',
-            weather: 'Weather',
             reports: 'Reports'
         },
 
@@ -665,9 +630,7 @@ export const translations = {
             warehouseItems: 'Warehouse Items',
             totalExpenses: 'Total Expenses',
             totalIncome: 'Total Income',
-            balance: 'Balance',
-            weatherInfo: 'Weather Info',
-            weatherHint: 'See detailed weather information in the "Weather" section'
+            balance: 'Balance'
         },
 
         // Crops
@@ -779,21 +742,7 @@ export const translations = {
             }
         },
 
-        // Weather
-        weather: {
-            title: 'Weather Information',
-            currentWeather: 'Current Weather',
-            forecast: 'Forecast',
-            temperature: 'Temperature',
-            humidity: 'Humidity',
-            wind: 'Wind',
-            pressure: 'Pressure',
-            city: 'City',
-            searchCity: 'Search City',
-            today: 'Today',
-            tomorrow: 'Tomorrow',
-            weekly: 'Weekly'
-        },
+
 
         // Analytics
         analytics: {

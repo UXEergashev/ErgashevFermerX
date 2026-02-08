@@ -1,7 +1,7 @@
 import { openDB } from 'idb';
 
 const DB_NAME = 'FermerXDB';
-const DB_VERSION = 3;
+const DB_VERSION = 4;
 
 export const initDB = async () => {
     const db = await openDB(DB_NAME, DB_VERSION, {
@@ -95,9 +95,20 @@ export const initDB = async () => {
                 notificationStore.createIndex('userId', 'userId');
             }
 
-            // Migration for version 2: Extra checks if needed
-            if (oldVersion < 2) {
-                // Version 2 specific logic (e.g. adding new indices not covered above)
+            // Trash store
+            let trashStore;
+            if (!db.objectStoreNames.contains('trash')) {
+                trashStore = db.createObjectStore('trash', { keyPath: 'id', autoIncrement: true });
+            } else {
+                trashStore = transaction.objectStore('trash');
+            }
+            if (!trashStore.indexNames.contains('userId')) {
+                trashStore.createIndex('userId', 'userId');
+            }
+
+            // Migration for version 4: Extra checks if needed
+            if (oldVersion < 4) {
+                // Version 4 specific logic
             }
         },
     });

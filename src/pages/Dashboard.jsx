@@ -111,12 +111,7 @@ const Dashboard = () => {
                 />
             </div>
 
-            <div className="card mt-lg">
-                <h3 className="card-title">{t('dashboard.weatherInfo')}</h3>
-                <p className="text-muted text-small">
-                    {t('dashboard.weatherHint')}
-                </p>
-            </div>
+
         </div>
     );
 };

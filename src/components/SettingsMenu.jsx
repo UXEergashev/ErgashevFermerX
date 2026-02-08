@@ -8,13 +8,25 @@ import {
     Bell,
     User,
     ShieldCheck,
-    CircleHelp
+    CircleHelp,
+    Trash as TrashIcon,
+    RefreshCw
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { fullSync } from '../db/sync';
 
 const SettingsMenu = ({ isOpen, onClose }) => {
     const { language, setLanguage, languages, t } = useLanguage();
     const { isDarkMode, toggleDarkMode } = useTheme();
+    const { isSyncing } = useAuth();
     const menuRef = useRef(null);
+    const navigate = useNavigate();
+
+    const handleManualSync = async () => {
+        if (isSyncing) return;
+        await fullSync();
+    };
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -90,16 +102,22 @@ const SettingsMenu = ({ isOpen, onClose }) => {
                         <span className="slider"></span>
                     </label>
                 </div>
+                <div className="settings-item" style={{ cursor: 'pointer' }} onClick={handleManualSync}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <RefreshCw size={18} style={{ animation: isSyncing ? 'spin 2s linear infinite' : 'none' }} />
+                        <span>{t('settings.syncNow') || 'Bulut bilan sinxronlash'}</span>
+                    </div>
+                </div>
                 <div className="settings-item" style={{ cursor: 'pointer' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                         <User size={18} />
                         <span>{t('auth.profile') || 'Profil'}</span>
                     </div>
                 </div>
-                <div className="settings-item" style={{ cursor: 'pointer' }}>
+                <div className="settings-item" style={{ cursor: 'pointer' }} onClick={() => { navigate('/trash'); onClose(); }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <ShieldCheck size={18} />
-                        <span>{t('settings.privacy') || 'Maxfiylik'}</span>
+                        <TrashIcon size={18} />
+                        <span>{t('settings.trash') || 'Karzinka'}</span>
                     </div>
                 </div>
                 <div className="settings-item" style={{ cursor: 'pointer' }}>

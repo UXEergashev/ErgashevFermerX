@@ -8,8 +8,7 @@ import {
     Wallet,
     Package,
     BarChart3,
-    PieChart,
-    CloudSun
+    PieChart
 } from 'lucide-react';
 
 const BottomNav = () => {
@@ -22,8 +21,7 @@ const BottomNav = () => {
         { path: '/finance', icon: <Wallet size={22} />, labelKey: 'nav.finance' },
         { path: '/warehouse', icon: <Package size={22} />, labelKey: 'nav.warehouse' },
         { path: '/reports', icon: <BarChart3 size={22} />, labelKey: 'nav.reports' },
-        { path: '/analytics', icon: <PieChart size={22} />, labelKey: 'nav.analytics' },
-        { path: '/weather', icon: <CloudSun size={22} />, labelKey: 'nav.weather' }
+        { path: '/analytics', icon: <PieChart size={22} />, labelKey: 'nav.analytics' }
     ];
 
     return (

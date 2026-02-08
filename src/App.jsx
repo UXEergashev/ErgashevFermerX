@@ -13,8 +13,8 @@ import Land from './pages/Land';
 import Finance from './pages/Finance';
 import Warehouse from './pages/Warehouse';
 import Reports from './pages/Reports';
-import Weather from './pages/Weather';
 import Analytics from './pages/Analytics';
+import Trash from './pages/Trash';
 
 // Components
 import Layout from './components/Layout';
@@ -90,7 +90,7 @@ function App() {
                                 <Route path="warehouse" element={<Warehouse />} />
                                 <Route path="reports" element={<Reports />} />
                                 <Route path="analytics" element={<Analytics />} />
-                                <Route path="weather" element={<Weather />} />
+                                <Route path="trash" element={<Trash />} />
                             </Route>
 
                             {/* Catch all - redirect to dashboard */}

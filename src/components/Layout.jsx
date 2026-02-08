@@ -5,10 +5,10 @@ import LanguageSelector from './LanguageSelector';
 import SettingsMenu from './SettingsMenu';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
-import { LogOut, Settings } from 'lucide-react';
+import { LogOut, Settings, RefreshCw } from 'lucide-react';
 
 const Layout = () => {
-    const { user, logout } = useAuth();
+    const { user, logout, isSyncing } = useAuth();
     const { t } = useLanguage();
     const [isSettingsOpen, setIsSettingsOpen] = React.useState(false);
 
@@ -17,8 +17,21 @@ const Layout = () => {
             <header style={styles.header}>
                 <div style={styles.headerContent}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <div className="icon-container" style={{ padding: '6px', background: 'rgba(255,255,255,0.2)', color: 'white' }}>
+                        <div className="icon-container" style={{ padding: '6px', background: 'rgba(255,255,255,0.2)', color: 'white', position: 'relative' }}>
                             <img src="/favicon.png" alt="Logo" style={{ width: '20px', height: '20px' }} />
+                            {isSyncing && (
+                                <div style={{
+                                    position: 'absolute',
+                                    top: '-4px',
+                                    right: '-4px',
+                                    background: 'var(--primary)',
+                                    borderRadius: '50%',
+                                    padding: '2px',
+                                    animation: 'spin 2s linear infinite'
+                                }}>
+                                    <RefreshCw size={10} />
+                                </div>
+                            )}
                         </div>
                         <h2 style={styles.appName}>FermerX</h2>
                     </div>
