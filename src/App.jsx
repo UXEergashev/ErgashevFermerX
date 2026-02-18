@@ -5,6 +5,7 @@ import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext';
 
 // Pages
+import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
@@ -56,6 +57,9 @@ function App() {
                 <LanguageProvider>
                     <AuthProvider>
                         <Routes>
+                            {/* Public Landing Page */}
+                            <Route path="/welcome" element={<LandingPage />} />
+
                             {/* Public Routes */}
                             <Route
                                 path="/login"
@@ -93,8 +97,8 @@ function App() {
                                 <Route path="trash" element={<Trash />} />
                             </Route>
 
-                            {/* Catch all - redirect to dashboard */}
-                            <Route path="*" element={<Navigate to="/" />} />
+                            {/* Catch all - redirect to welcome for non-auth, dashboard for auth */}
+                            <Route path="*" element={<Navigate to="/welcome" />} />
                         </Routes>
                     </AuthProvider>
                 </LanguageProvider>

@@ -95,12 +95,17 @@ const Register = () => {
 
     return (
         <div style={styles.container}>
+            <div style={styles.decorativeCircle1}></div>
+            <div style={styles.decorativeCircle2}></div>
+
             <div style={styles.langSelector}>
                 <LanguageSelector />
             </div>
             <div style={styles.card}>
                 <div style={styles.header}>
-                    <img src="/favicon.png" alt="Logo" style={{ width: '64px', height: '64px', borderRadius: '16px', marginBottom: '1rem' }} />
+                    <div style={styles.logoWrapper}>
+                        <img src="/favicon.png" alt="Logo" style={{ width: '64px', height: '64px', borderRadius: '16px' }} />
+                    </div>
                     <h1 style={styles.title}>FermerX</h1>
                     <p style={styles.subtitle}>{t('auth.register')}</p>
                 </div>
@@ -188,51 +193,89 @@ const styles = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '1rem',
-        background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-        position: 'relative'
+        padding: '2rem 1rem',
+        background: 'linear-gradient(135deg, #10b981 0%, #34d399 50%, #059669 100%)',
+        position: 'relative',
+        overflow: 'hidden'
     },
     langSelector: {
         position: 'absolute',
-        top: '1rem',
-        right: '1rem'
+        top: '1.5rem',
+        right: '1.5rem',
+        zIndex: 10
+    },
+    decorativeCircle1: {
+        position: 'absolute',
+        width: '400px',
+        height: '400px',
+        borderRadius: '50%',
+        background: 'rgba(255, 255, 255, 0.1)',
+        top: '-100px',
+        left: '-100px',
+        animation: 'float 6s ease-in-out infinite'
+    },
+    decorativeCircle2: {
+        position: 'absolute',
+        width: '300px',
+        height: '300px',
+        borderRadius: '50%',
+        background: 'rgba(255, 255, 255, 0.1)',
+        bottom: '-50px',
+        right: '-50px',
+        animation: 'float 8s ease-in-out infinite reverse'
     },
     card: {
-        background: 'var(--bg-card)',
-        borderRadius: '1.5rem',
-        padding: '2.5rem',
+        background: 'rgba(255, 255, 255, 0.95)',
+        backdropFilter: 'blur(20px)',
+        borderRadius: '2rem',
+        padding: '3rem 2.5rem',
         width: '100%',
-        maxWidth: '450px',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
-        margin: '2rem 0'
+        maxWidth: '480px',
+        boxShadow: '0 30px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.2)',
+        border: '1px solid rgba(255, 255, 255, 0.3)',
+        position: 'relative',
+        zIndex: 1,
+        animation: 'slideIn 0.5s ease-out'
     },
     header: {
         textAlign: 'center',
-        marginBottom: '2rem'
+        marginBottom: '2.5rem'
+    },
+    logoWrapper: {
+        display: 'inline-block',
+        padding: '0.5rem',
+        background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+        borderRadius: '1.25rem',
+        marginBottom: '1.5rem',
+        boxShadow: '0 8px 16px rgba(16, 185, 129, 0.4)'
     },
     title: {
-        fontSize: '2.5rem',
+        fontSize: '2.75rem',
         fontWeight: '800',
-        color: 'var(--primary)',
-        marginBottom: '0.5rem',
-        letterSpacing: '-1px'
+        background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        backgroundClip: 'text',
+        marginBottom: '0.75rem',
+        letterSpacing: '-2px'
     },
     subtitle: {
-        color: 'var(--text-muted)',
-        fontSize: '1rem',
+        color: '#6b7280',
+        fontSize: '1.125rem',
         fontWeight: '500'
     },
     footer: {
         textAlign: 'center',
         marginTop: '2rem',
-        color: 'var(--text-muted)',
-        fontSize: '0.875rem'
+        color: '#6b7280',
+        fontSize: '0.9375rem'
     },
     link: {
-        color: 'var(--primary)',
+        color: '#10b981',
         fontWeight: '700',
-        textDecoration: 'none'
+        textDecoration: 'none',
+        transition: 'all 0.2s',
+        borderBottom: '2px solid transparent'
     }
 };
 

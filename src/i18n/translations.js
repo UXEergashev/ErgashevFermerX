@@ -268,6 +268,48 @@ export const translations = {
             notifications: 'Bildirishnomalar',
             privacy: 'Maxfiylik',
             profile: 'Profil'
+        },
+
+        // Landing Page
+        landing: {
+            hero: {
+                title: 'Fermerlik biznesingizni yangi darajaga olib chiqing',
+                subtitle: 'FermerX - bu zamonaviy fermer xo\'jaliklari uchun eng yaxshi boshqaruv tizimi. Barcha ma\'lumotlarni bir joyda saqlang va tahlil qiling.',
+                getStarted: 'Boshlash'
+            },
+            features: {
+                title: 'Kuchli imkoniyatlar',
+                subtitle: 'Fermer xo\'jaligingizni boshqarish uchun zarur bo\'lgan barcha vositalar',
+                analytics: 'Tahlillar',
+                analyticsDesc: 'To\'liq tahlillar va hisobotlar bilan biznesingizni kuzatib boring',
+                crops: 'Ekinlar',
+                cropsDesc: 'Ekinlaringizni boshqaring va hosillarni kuzatib boring',
+                land: 'Yer maydoni',
+                landDesc: 'Yer maydonlaringizni samarali boshqaring',
+                finance: 'Moliya',
+                financeDesc: 'Xarajat va daromadlaringizni kuzatib boring',
+                warehouse: 'Ombor',
+                warehouseDesc: 'Ombor mahsulotlarini boshqaring va zaxiralarni nazorat qiling',
+                mobile: 'Mobil ilova',
+                mobileDesc: 'Har qanday joydan ishlash imkoniyati'
+            },
+            benefits: {
+                title: 'Nima uchun FermerX?',
+                realtime: 'Real vaqt rejimida ma\'lumotlar yangilanadi',
+                multilang: 'Ko\'p tilli interfeys (O\'zbek, Rus, Ingliz)',
+                offline: 'Oflayn rejimda ishlash imkoniyati',
+                analytics: 'Batafsil tahlillar va hisobotlar',
+                reports: 'Excel va PDF formatida eksport',
+                secure: 'Ma\'lumotlar xavfsizligi kafolatlangan'
+            },
+            cta: {
+                title: 'Bugun boshlang!',
+                subtitle: 'Fermer xo\'jaligingizni yangi darajaga olib chiqing',
+                button: 'Bepul ro\'yxatdan o\'ting'
+            },
+            footer: {
+                rights: 'Barcha huquqlar himoyalangan'
+            }
         }
     },
 
@@ -536,6 +578,48 @@ export const translations = {
             notifications: 'Уведомления',
             privacy: 'Конфиденциальность',
             profile: 'Профиль'
+        },
+
+        // Landing Page
+        landing: {
+            hero: {
+                title: 'Выведите свой фермерский бизнес на новый уровень',
+                subtitle: 'FermerX - лучшая система управления для современных ферм. Храните и анализируйте все данные в одном месте.',
+                getStarted: 'Начать'
+            },
+            features: {
+                title: 'Мощные возможности',
+                subtitle: 'Все необходимые инструменты для управления вашей фермой',
+                analytics: 'Аналитика',
+                analyticsDesc: 'Отслеживайте свой бизнес с помощью полной аналитики и отчётов',
+                crops: 'Культуры',
+                cropsDesc: 'Управляйте культурами и отслеживайте урожай',
+                land: 'Земельные участки',
+                landDesc: 'Эффективно управляйте своими земельными участками',
+                finance: 'Финансы',
+                financeDesc: 'Отслеживайте расходы и доходы',
+                warehouse: 'Склад',
+                warehouseDesc: 'Управляйте складскими товарами и контролируйте запасы',
+                mobile: 'Мобильное приложение',
+                mobileDesc: 'Возможность работы из любого места'
+            },
+            benefits: {
+                title: 'Почему FermerX?',
+                realtime: 'Данные обновляются в реальном времени',
+                multilang: 'Многоязычный интерфейс (Узбекский, Русский, Английский)',
+                offline: 'Возможность работы в офлайн режиме',
+                analytics: 'Подробная аналитика и отчёты',
+                reports: 'Экспорт в Excel и PDF',
+                secure: 'Гарантированная безопасность данных'
+            },
+            cta: {
+                title: 'Начните сегодня!',
+                subtitle: 'Выведите свою ферму на новый уровень',
+                button: 'Зарегистрируйтесь бесплатно'
+            },
+            footer: {
+                rights: 'Все права защищены'
+            }
         }
     },
 
@@ -804,6 +888,48 @@ export const translations = {
             notifications: 'Notifications',
             privacy: 'Privacy',
             profile: 'Profile'
+        },
+
+        // Landing Page
+        landing: {
+            hero: {
+                title: 'Take your farming business to the next level',
+                subtitle: 'FermerX - the best management system for modern farms. Store and analyze all your data in one place.',
+                getStarted: 'Get Started'
+            },
+            features: {
+                title: 'Powerful Features',
+                subtitle: 'All the tools you need to manage your farm',
+                analytics: 'Analytics',
+                analyticsDesc: 'Track your business with complete analytics and reports',
+                crops: 'Crops',
+                cropsDesc: 'Manage your crops and track harvests',
+                land: 'Land Management',
+                landDesc: 'Efficiently manage your land plots',
+                finance: 'Finance',
+                financeDesc: 'Track your expenses and income',
+                warehouse: 'Warehouse',
+                warehouseDesc: 'Manage warehouse products and control inventory',
+                mobile: 'Mobile App',
+                mobileDesc: 'Work from anywhere'
+            },
+            benefits: {
+                title: 'Why FermerX?',
+                realtime: 'Real-time data updates',
+                multilang: 'Multilingual interface (Uzbek, Russian, English)',
+                offline: 'Offline mode capability',
+                analytics: 'Detailed analytics and reports',
+                reports: 'Export to Excel and PDF',
+                secure: 'Guaranteed data security'
+            },
+            cta: {
+                title: 'Get Started Today!',
+                subtitle: 'Take your farm to the next level',
+                button: 'Register for Free'
+            },
+            footer: {
+                rights: 'All rights reserved'
+            }
         }
     }
 };
