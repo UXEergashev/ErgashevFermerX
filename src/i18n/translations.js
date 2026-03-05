@@ -128,7 +128,12 @@ export const translations = {
                 equipment: 'Jihozlar',
                 water: 'Suv',
                 other: 'Boshqa'
-            }
+            },
+            irrigationTime: '💧 Sug\'orish vaqti keldi!',
+            irrigated: '✅ Sug\'ordim',
+            postpone: '⏰ Kechiktirish (+2 kun)',
+            fertilizerTime: '🧪 O\'g\'itlash vaqti keldi!',
+            fertilized: '✅ O\'g\'itladim'
         },
 
         // Land
@@ -440,7 +445,12 @@ export const translations = {
                 equipment: 'Оборудование',
                 water: 'Вода',
                 other: 'Другое'
-            }
+            },
+            irrigationTime: '💧 Время полива!',
+            irrigated: '✅ Полил',
+            postpone: '⏰ Отложить (+2 дня)',
+            fertilizerTime: '🧪 Время удобрения!',
+            fertilized: '✅ Удобрил'
         },
 
         // Land
@@ -750,7 +760,12 @@ export const translations = {
                 equipment: 'Equipment',
                 water: 'Water',
                 other: 'Other'
-            }
+            },
+            irrigationTime: '💧 Irrigation time!',
+            irrigated: '✅ Irrigated',
+            postpone: '⏰ Postpone (+2 days)',
+            fertilizerTime: '🧪 Fertilizing time!',
+            fertilized: '✅ Fertilized'
         },
 
         // Land

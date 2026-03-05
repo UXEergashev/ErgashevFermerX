@@ -79,7 +79,7 @@ const Crops = () => {
                         date: cropData.plantDate,
                         type: expenseType.type,
                         amount: parseFloat(amount),
-                        notes: `${expenseType.icon} ${cropData.name} - ${expenseType.type}`,
+                        notes: `${expenseType.icon} ${cropData.name} - ${expenseType.type} `,
                         cropName: cropData.name,
                         autoCreated: true
                     });
@@ -90,6 +90,15 @@ const Crops = () => {
             loadCrops();
         } catch (error) {
             console.error('Error saving crop:', error);
+        }
+    };
+
+    const handleUpdateCrop = async (updatedCrop) => {
+        try {
+            await update('crops', updatedCrop);
+            loadCrops();
+        } catch (error) {
+            console.error('Error updating crop:', error);
         }
     };
 
@@ -129,6 +138,7 @@ const Crops = () => {
                             crop={crop}
                             onEdit={() => handleEdit(crop)}
                             onDelete={() => handleDelete(crop.id)}
+                            onUpdateCrop={handleUpdateCrop}
                         />
                     ))}
                 </div>
@@ -150,10 +160,16 @@ const Crops = () => {
     );
 };
 
-const CropCard = ({ crop, onEdit, onDelete }) => {
+const CropCard = ({ crop, onEdit, onDelete, onUpdateCrop }) => {
+    const { t } = useLanguage();
     const today = new Date();
+    today.setHours(0, 0, 0, 0); // Normalize today to start of day
+
     const irrigationDate = new Date(crop.irrigationDate);
+    irrigationDate.setHours(0, 0, 0, 0); // Normalize irrigationDate to start of day
+
     const fertilizerDate = new Date(crop.fertilizerDate);
+    fertilizerDate.setHours(0, 0, 0, 0); // Normalize fertilizerDate to start of day
 
     const needsIrrigation = irrigationDate <= today;
     const needsFertilizer = fertilizerDate <= today;
@@ -177,6 +193,35 @@ const CropCard = ({ crop, onEdit, onDelete }) => {
             case 'fertilizer': return <Beaker size={16} />;
             default: return <AlertTriangle size={16} />;
         }
+    };
+
+    const handleUpdateCropDate = async (field, newDate) => {
+        const updatedCrop = { ...crop, [field]: newDate.toISOString().split('T')[0] }; // Store as YYYY-MM-DD
+        await onUpdateCrop(updatedCrop);
+    };
+
+    const handleIrrigate = () => {
+        const newDate = new Date();
+        newDate.setDate(newDate.getDate() + crop.irrigationInterval);
+        handleUpdateCropDate('irrigationDate', newDate);
+    };
+
+    const handlePostponeIrrigation = () => {
+        const newDate = new Date();
+        newDate.setDate(newDate.getDate() + 1); // Postpone by 1 day
+        handleUpdateCropDate('irrigationDate', newDate);
+    };
+
+    const handleFertilize = () => {
+        const newDate = new Date();
+        newDate.setDate(newDate.getDate() + crop.fertilizerInterval);
+        handleUpdateCropDate('fertilizerDate', newDate);
+    };
+
+    const handlePostponeFertilizer = () => {
+        const newDate = new Date();
+        newDate.setDate(newDate.getDate() + 1); // Postpone by 1 day
+        handleUpdateCropDate('fertilizerDate', newDate);
     };
 
     return (
@@ -241,7 +286,7 @@ const CropCard = ({ crop, onEdit, onDelete }) => {
                                     overflow: 'hidden'
                                 }}>
                                     <div style={{
-                                        width: `${yieldHealth}%`,
+                                        width: `${yieldHealth}% `,
                                         height: '100%',
                                         background: getHealthColor(),
                                         transition: 'width 0.3s ease'
@@ -277,15 +322,35 @@ const CropCard = ({ crop, onEdit, onDelete }) => {
                     </div>
                 )}
 
-                {/* Original irrigation/fertilizer reminders */}
+                {/* Original irrigation/fertilizer reminders with action buttons */}
                 {needsIrrigation && warnings.filter(w => w.type === 'irrigation').length === 0 && (
-                    <div className="alert alert-info mt-sm" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <Droplets size={16} /> Sug'orish vaqti keldi!
+                    <div className="alert alert-info mt-sm" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <Droplets size={16} /> {t('crops.irrigationTime')}
+                        </div>
+                        <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
+                            <button onClick={handleIrrigate} className="btn btn-sm btn-primary flex-grow">
+                                {t('crops.irrigated')}
+                            </button>
+                            <button onClick={handlePostponeIrrigation} className="btn btn-sm btn-outline flex-grow">
+                                {t('crops.postpone')}
+                            </button>
+                        </div>
                     </div>
                 )}
                 {needsFertilizer && warnings.filter(w => w.type === 'fertilizer').length === 0 && (
-                    <div className="alert alert-warning mt-sm" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <Beaker size={16} /> O'g'itlash vaqti keldi!
+                    <div className="alert alert-warning mt-sm" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <Beaker size={16} /> {t('crops.fertilizerTime')}
+                        </div>
+                        <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
+                            <button onClick={handleFertilize} className="btn btn-sm btn-primary flex-grow">
+                                {t('crops.fertilized')}
+                            </button>
+                            <button onClick={handlePostponeFertilizer} className="btn btn-sm btn-outline flex-grow">
+                                {t('crops.postpone')}
+                            </button>
+                        </div>
                     </div>
                 )}
 
