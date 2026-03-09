@@ -11,7 +11,8 @@ import {
     CircleHelp,
     Trash as TrashIcon,
     RefreshCw,
-    Archive
+    Archive,
+    ShoppingCart
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -125,6 +126,12 @@ const SettingsMenu = ({ isOpen, onClose }) => {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                         <Archive size={18} />
                         <span>🌾 Yig'ilgan ekinlar</span>
+                    </div>
+                </div>
+                <div className="settings-item" style={{ cursor: 'pointer' }} onClick={() => { navigate('/sold-items'); onClose(); }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <ShoppingCart size={18} />
+                        <span>🛒 Sotilgan mahsulotlar</span>
                     </div>
                 </div>
                 <div className="settings-item" style={{ cursor: 'pointer' }}>

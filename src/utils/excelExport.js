@@ -313,6 +313,129 @@ const createLandSheet = (land) => {
 };
 
 /**
+ * Create harvested crops worksheet
+ */
+const createHarvestedCropsSheet = (harvestedCrops) => {
+    const data = [
+        ['🌾 YIG\'ILGAN EKINLAR HISOBOTI'],
+        [''],
+        [
+            'Ekin nomi', 'Turi', 'Maydon (ga)',
+            'Ekilgan sana', 'Yig\'ilgan sana', 'O\'sish kunlari',
+            'Sug\'orish (marta)', 'O\'g\'itlash (marta)',
+            'Pragnoz hosil (t)', 'Haqiqiy hosil (t)', 'Farq (t)', 'Farq (%)',
+            'Hosil/ga (haqiqiy)', 'Hosil salomatligi (%)',
+            'Urug\' xarajat', 'O\'g\'it xarajat', 'Texnika xarajat', 'Ish haqi', 'Jami xarajat',
+            'Izoh'
+        ]
+    ];
+
+    harvestedCrops.forEach(h => {
+        const growthDays = h.plantDate && h.harvestDate
+            ? Math.floor((new Date(h.harvestDate) - new Date(h.plantDate)) / (1000 * 60 * 60 * 24))
+            : '-';
+        const diffPct = h.predictedYield > 0
+            ? (((h.actualYield - h.predictedYield) / h.predictedYield) * 100).toFixed(1) + '%'
+            : '-';
+        const totalExp = (
+            (parseFloat(h.seedsExpense) || 0) +
+            (parseFloat(h.fertilizerExpense) || 0) +
+            (parseFloat(h.machineryExpense) || 0) +
+            (parseFloat(h.laborExpense) || 0)
+        );
+        data.push([
+            h.name || '',
+            h.type || '',
+            parseFloat(h.area || 0).toFixed(2),
+            formatDate(h.plantDate),
+            formatDate(h.harvestDate),
+            growthDays,
+            h.irrigationCount || 0,
+            h.fertilizerCount || 0,
+            parseFloat(h.predictedYield || 0).toFixed(2),
+            parseFloat(h.actualYield || 0).toFixed(2),
+            parseFloat(h.yieldDifference || 0).toFixed(2),
+            diffPct,
+            parseFloat(h.actualYieldPerHa || 0).toFixed(2),
+            parseFloat(h.yieldHealthPct || 0).toFixed(1) + '%',
+            formatCurrency(h.seedsExpense || 0),
+            formatCurrency(h.fertilizerExpense || 0),
+            formatCurrency(h.machineryExpense || 0),
+            formatCurrency(h.laborExpense || 0),
+            formatCurrency(totalExp),
+            h.notes || ''
+        ]);
+    });
+
+    if (harvestedCrops.length > 0) {
+        const totalActual = harvestedCrops.reduce((s, h) => s + parseFloat(h.actualYield || 0), 0);
+        const totalPredicted = harvestedCrops.reduce((s, h) => s + parseFloat(h.predictedYield || 0), 0);
+        data.push(['']);
+        data.push(['JAMI', '', '', '', '', '', '', '',
+            totalPredicted.toFixed(2), totalActual.toFixed(2),
+            (totalActual - totalPredicted).toFixed(2), '',
+            '', '', '', '', '', '', '', ''
+        ]);
+    }
+
+    const ws = XLSX.utils.aoa_to_sheet(data);
+    setColumnWidths(ws, data);
+    return ws;
+};
+
+/**
+ * Create sold items worksheet
+ */
+const createSoldItemsSheet = (soldItems) => {
+    const data = [
+        ['🛒 SOTILGAN MAHSULOTLAR HISOBOTI'],
+        [''],
+        [
+            'Sotuv sanasi', 'Mahsulot nomi', 'Kategoriya',
+            'Kg', 'Tonna', 'Narx (1 kg, so\'m)', 'Narx (1 t, so\'m)', 'Jami daromad (so\'m)',
+            'Xaridor', 'Telefon',
+            'Ombor (sotuv oldidan, kg)', 'Ombor (sotuv sonidan, kg)',
+            'Izoh'
+        ]
+    ];
+
+    soldItems.forEach(s => {
+        data.push([
+            formatDate(s.soldDate),
+            s.itemName || '',
+            s.itemCategory || '',
+            parseFloat(s.quantityKg || 0).toFixed(1),
+            parseFloat(s.quantityTon || 0).toFixed(3),
+            parseFloat(s.pricePerKg || 0).toLocaleString('uz-UZ'),
+            parseFloat(s.pricePerTon || 0).toLocaleString('uz-UZ'),
+            parseFloat(s.totalIncome || 0).toLocaleString('uz-UZ'),
+            s.buyerName || '-',
+            s.buyerPhone || '-',
+            parseFloat(s.stockBeforeKg || 0).toFixed(0),
+            parseFloat(s.stockAfterKg || 0).toFixed(0),
+            s.notes || ''
+        ]);
+    });
+
+    if (soldItems.length > 0) {
+        const totalKg = soldItems.reduce((s, x) => s + parseFloat(x.quantityKg || 0), 0);
+        const totalIncome = soldItems.reduce((s, x) => s + parseFloat(x.totalIncome || 0), 0);
+        const avgPrice = totalKg > 0 ? totalIncome / totalKg : 0;
+        data.push(['']);
+        data.push([
+            'JAMI', '', '',
+            totalKg.toFixed(1), (totalKg / 1000).toFixed(3),
+            avgPrice.toFixed(0) + ' (o\'rtacha)', '', totalIncome.toLocaleString('uz-UZ'),
+            '', '', '', '', ''
+        ]);
+    }
+
+    const ws = XLSX.utils.aoa_to_sheet(data);
+    setColumnWidths(ws, data);
+    return ws;
+};
+
+/**
  * Export report data to Excel file using Blob
  * @param {Object} reportData - Complete report data
  * @param {string} filename - Optional custom filename
@@ -337,6 +460,16 @@ export const exportToExcel = (reportData, filename) => {
         XLSX.utils.book_append_sheet(wb, incomeSheet, 'Daromadlar');
         XLSX.utils.book_append_sheet(wb, warehouseSheet, 'Ombor');
         XLSX.utils.book_append_sheet(wb, landSheet, 'Yer maydoni');
+
+        // Yangi sheet'lar — yig'ilgan ekinlar va sotilgan mahsulotlar
+        if (reportData.harvestedCrops && reportData.harvestedCrops.length > 0) {
+            const harvestedSheet = createHarvestedCropsSheet(reportData.harvestedCrops);
+            XLSX.utils.book_append_sheet(wb, harvestedSheet, "Yig'ilgan ekinlar");
+        }
+        if (reportData.soldItems && reportData.soldItems.length > 0) {
+            const soldSheet = createSoldItemsSheet(reportData.soldItems);
+            XLSX.utils.book_append_sheet(wb, soldSheet, 'Sotilgan mahsulotlar');
+        }
 
         // Generate filename if not provided
         if (!filename) {

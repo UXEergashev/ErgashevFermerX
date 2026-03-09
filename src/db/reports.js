@@ -147,6 +147,15 @@ const generateReport = async (userId, days, type) => {
             getAllByUserId('warehouseHistory', userId)
         ]);
 
+        // harvestedCrops va soldItems ni alohida yuklash
+        let harvestedCrops = [], soldItems = [];
+        try {
+            const { getDB } = await import('./database');
+            const db = await getDB();
+            harvestedCrops = await db.getAllFromIndex('harvestedCrops', 'userId', userId);
+            soldItems = await db.getAllFromIndex('soldItems', 'userId', userId);
+        } catch (e) { console.warn('Could not load harvestedCrops/soldItems:', e); }
+
         // Calculate date range
         const endDate = new Date();
         const startDate = new Date();
@@ -198,7 +207,9 @@ const generateReport = async (userId, days, type) => {
             expenses: filteredExpenses,
             income: filteredIncome,
             warehouse,
-            warehouseHistory: enhancedWarehouseHistory
+            warehouseHistory: enhancedWarehouseHistory,
+            harvestedCrops: harvestedCrops,
+            soldItems: soldItems
         };
 
         // Calculate summary

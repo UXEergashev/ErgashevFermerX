@@ -17,6 +17,7 @@ import Reports from './pages/Reports';
 import Analytics from './pages/Analytics';
 import Trash from './pages/Trash';
 import HarvestedCrops from './pages/HarvestedCrops';
+import SoldItems from './pages/SoldItems';
 
 // Components
 import Layout from './components/Layout';
@@ -97,6 +98,7 @@ function App() {
                                 <Route path="analytics" element={<Analytics />} />
                                 <Route path="trash" element={<Trash />} />
                                 <Route path="harvested-crops" element={<HarvestedCrops />} />
+                                <Route path="sold-items" element={<SoldItems />} />
                             </Route>
 
                             {/* Catch all - redirect to welcome for non-auth, dashboard for auth */}

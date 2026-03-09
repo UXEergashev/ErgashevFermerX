@@ -1,7 +1,7 @@
 import { openDB } from 'idb';
 
 const DB_NAME = 'FermerXDB';
-const DB_VERSION = 5;
+const DB_VERSION = 6;
 
 export const initDB = async () => {
     const db = await openDB(DB_NAME, DB_VERSION, {
@@ -120,6 +120,17 @@ export const initDB = async () => {
             }
             if (!harvestedStore.indexNames.contains('userId')) {
                 harvestedStore.createIndex('userId', 'userId');
+            }
+
+            // Version 6: Sold Items archive store
+            let soldItemsStore;
+            if (!db.objectStoreNames.contains('soldItems')) {
+                soldItemsStore = db.createObjectStore('soldItems', { keyPath: 'id', autoIncrement: true });
+            } else {
+                soldItemsStore = transaction.objectStore('soldItems');
+            }
+            if (!soldItemsStore.indexNames.contains('userId')) {
+                soldItemsStore.createIndex('userId', 'userId');
             }
         },
     });
